@@ -1,0 +1,37 @@
+program jacobi;
+
+config var
+  n         : integer = 5;
+  epsilon   : float   = 0.0001;
+
+region
+  R     = [1..n, 1..n];
+  BigR  = [0..n + 1, 0..n + 1];
+
+direction
+  north = [-1,  0];
+  east  = [ 0,  1];
+  south = [ 1,  0];
+  west  = [ 0, -1];
+
+procedure jacobi();
+var
+  A, Temp : [BigR] float;
+  delta   : float;
+
+[R] begin
+
+  A := 0.0;
+  [north of R] A := 0.0;
+  [east of R] A := 0.0;
+  [west of R] A := 0.0;
+  [south of R] A := 1.0;
+
+  repeat
+    Temp := (A@north + A@east + A@south + A@west) / 4.0;
+    delta := max<< abs(A - Temp);
+    A := Temp;
+  until delta < epsilon;
+
+  writeln(A);
+end;

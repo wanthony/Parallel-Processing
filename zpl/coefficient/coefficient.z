@@ -1,0 +1,23 @@
+program Coefficient;
+
+config var 	items : integer = 100;
+region		V = [1..items];
+
+procedure Coefficient();
+	var 	Sample1, Sample2 	: [V] float;
+		mu1, mu2, r		: float;
+		f1, f2			: file;
+
+[V] begin
+	f1 := open("Expr1", "r"); read (f1, Sample1);
+	f2 := open("Expr2", "r"); read (f2, Sample2);
+	mu1 := +<<(Sample1 / items);
+	mu2 := +<<(Sample2 / items);
+	Sample1 := Sample1 - mu1;
+	Sample2 := Sample2 - mu2;
+	r := (+<<(Sample1 * Sample2))
+	     / sqrt((+<<(Sample1^2)) * (+<<(Sample2^2)));
+	writeln("Sample means: ", mu1, mu2);
+	writeln("Correlation coefficient: ", r);
+	close(f1); close(f2);
+end;

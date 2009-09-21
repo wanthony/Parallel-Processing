@@ -1,0 +1,16 @@
+program Sample_Stats;
+
+config var items : integer = 100;
+region R = [1..items];
+
+procedure Sample_Stats();
+var 	Sample : [R] float;
+	mu, sigma : float;
+
+[R] begin
+	read(Sample);
+	mu := +<<(Sample / items);
+	sigma := sqrt(+<<((Sample - mu) ^ 2/items));
+	writeln("Mean: ", mu);
+	writeln("Standard Deviation: ", sigma);
+end;

@@ -1,0 +1,12 @@
+program Multiply;
+	region R = [1..n, 1..n];
+	var A, B, C : [R] double;
+		i : integer;
+
+	procedure Multiply();
+		[R] begin
+			C := 0.0;
+			for i = 1 to n do
+				C := C + ( >>[1..n, i] A ) * ( >>[i, 1..n] B);
+			end;
+	end;

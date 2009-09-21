@@ -1,0 +1,39 @@
+program trapazoidal;
+
+config var
+	a : float = -2;
+	b : float = 2;
+	n : integer = 4;
+
+region
+	R = [0..n];
+
+var
+	Scalar 	: [R] float;
+	X 	: [R] float;
+	Y	: [R] float;
+	h	: float;
+	answer	: float;
+	time	: double;
+
+procedure f( in x : float ) : float ;
+begin
+	return 10;
+end;
+
+procedure trapazoidal() ;
+begin
+	ResetTimer();
+	h := (b - a) / n;
+[R]	Scalar := 2;
+[0]	Scalar := 1;
+[n]	Scalar := 1;
+[R]	X := a + (Index1*h);
+[R]	Y := (f(X)) * Scalar;
+[R]	answer := (+<< Y ) * (h / 2.0);
+
+	time := CheckTimer();
+
+	writeln("The estimate of the integral is ", answer);
+	writeln("\n\nTime is: ", time);
+end;
